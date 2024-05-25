@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Movie Collection{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/micon.png' %}">
+    {% block extra_css %}{% endblock %}
+    <style>
+
+
+/* Navbar styles */
+.navbar {
+    background-color: #003366;
+}
+
+.navbar-brand, .btn-outline-success {
+    font-weight: bold;
+    background: linear-gradient(to right, #4e54c8, #8f94fb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.btn-outline-success {
+    font-weight: bold;
+    border: 2px solid;
+    background: linear-gradient(to right, #4e54c8, #8f94fb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border-image: linear-gradient(to right, #4e54c8, #8f94fb);
+    border-image-slice: 1;
+}
+
+.navbar-brand:hover,
+.navbar-brand:focus {
+    color: #ffffff;
+}
+
+.navbar-nav .nav-link {
+    background: linear-gradient(to right, #4e54c8, #8f94fb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+    color: #ffffff;
+}
+
+.navbar-toggler-icon {
+    background-color: #ffffff;
+}
+
+.form-control:focus {
+    border-color: #4e54c8;
+    box-shadow: none;
+}
+
+
+/* Home page styles */
+body {
+    background-color: #f2f2f2;
+}
+.movie-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.movie {
+    width: 23%;
+    margin-bottom: 20px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.movie img {
+    width: 100%;
+    height: auto;
+}
+
+.movie h2 {
+    font-size: 14px;
+    margin: 10px 0;
+}
+
+.movie:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border-color: #007bff;
+    background: linear-gradient(to right, #4e54c8, #8f94fb);
+}
+.page-item .page-link.previous {
+    background: linear-gradient(to right, #4e54c8, #8f94fb);
+    color: white;
+}
+
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Movie Website </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'add_movie' %}">Add Movies</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}" method="get">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            {% if user.is_authenticated %}
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                </ul>
+            {% else %}
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    </li>
+                </ul>
+            {% endif %}
+        </div>
+    </nav>
+
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

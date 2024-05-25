@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block extra_css %}
+<style>
+.login-form-container {
+    width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.login-form-container input[type="text"],
+.login-form-container input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+.login-form-container button {
+    width: 100%;
+    background: linear-gradient(to right, #4e54c8, #8f94fb);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+
+.login-form-container button:hover {
+    background: linear-gradient(to right, #002b80, #004c99);
+}
+
+
+.login-form-container h5 {
+    text-align: center;
+}
+h2 {
+    text-align: center;
+}
+div {
+    text-align: center;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<h2>Login</h2>
+
+{% if messages %}
+    {% for message in messages %}
+        <div>{{ message }}</div>
+    {% endfor %}
+{% endif %}
+
+<form method="post" class="login-form-container">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>
+{% endblock %}

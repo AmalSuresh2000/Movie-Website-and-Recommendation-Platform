@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block extra_css %}
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    width: 60%;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
+
+.container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+.container h3 {
+    color: #666;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.container p {
+    color: #333;
+    line-height: 1.6;
+    text-align: center;
+    font-size: 1em;
+}
+
+.container a.btn {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    background: linear-gradient(to right, #4e54c8, #8f94fb);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.container a.btn:hover {
+    background: linear-gradient(to right, #002b80, #004c99);
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Profile</h2>
+
+    <h3>Registered Details:</h3>
+    <p>Username: {{ user.username }}</p>
+    <p>Email: {{ user.email }}</p>
+
+    <a href="{% url 'update_profile' %}" class="btn btn-primary">Update Profile</a>
+</div>
+{% endblock %}

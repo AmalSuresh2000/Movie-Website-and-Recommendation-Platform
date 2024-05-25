@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="movie-container">
+    {% for movie in movies %}
+        <div class="movie">
+            <h2>{{ movie.title }}</h2>
+            <a href="{% url 'movie_details' movie.id %}">
+                <img src="{{ movie.poster.url }}" alt="{{ movie.title }} Poster">
+            </a>
+
+        </div>
+    {% endfor %}
+</div>
+
+<!-- Pagination links -->
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    {% if movies.has_previous %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ movies.previous_page_number }}">Previous</a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+      <span class="page-link">Previous</span>
+    </li>
+    {% endif %}
+
+    {% for num in movies.paginator.page_range %}
+    <li class="page-item{% if num == movies.number %} active{% endif %}">
+      <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+    </li>
+    {% endfor %}
+
+    {% if movies.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ movies.next_page_number }}">Next</a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+      <span class="page-link">Next</span>
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+{% endblock %}

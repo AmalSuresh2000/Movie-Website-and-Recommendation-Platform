@@ -1,0 +1,71 @@
+<!-- search_results.html -->
+{% extends 'base.html' %}
+
+{% block title %}
+    Search Results for "{{ query }}"
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Styles for movie list */
+    .movie-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin-top: 20px;
+    }
+
+    /* Styles for each movie */
+    .movie {
+        width: 250px;
+        margin-bottom: 20px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    /* Styles for movie image */
+    .movie img {
+        width: 100%;
+        height: auto;
+        border-radius: 5px 5px 0 0;
+    }
+
+    /* Styles for movie title */
+    .movie h3 {
+        padding: 10px;
+        margin: 0;
+        font-size: 18px;
+        text-align: center;
+        color: #333;
+        background-color: #f8f9fa;
+        border-top: 1px solid #dee2e6;
+        border-radius: 0 0 5px 5px;
+    }
+
+    /* Styles for no results message */
+    .no-results {
+        margin-top: 20px;
+        text-align: center;
+        color: #666;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    {% if movies %}
+        <h2>Search Results for "{{ query }}"</h2>
+        <div class="movie-list">
+            {% for movie in movies %}
+                <div class="movie">
+                    <a href="{% url 'movie_details' movie.id %}">
+                        <img src="{{ movie.poster.url }}" alt="{{ movie.title }} Poster">
+                        <h3>{{ movie.title }}</h3>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="no-results">No results found for "{{ query }}".</p>
+    {% endif %}
+{% endblock %}
