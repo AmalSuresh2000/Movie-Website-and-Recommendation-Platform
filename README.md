@@ -36,4 +36,4 @@ Contributions are welcome! If you find any bugs or have suggestions for new feat
 
 
 ## Contact
-For questions or feedback, please contact [Amal Suresh](amal.suresh1874@gmail.com).
+For questions or feedback, please contact [Amal Suresh](https://github.com/AmalSuresh2000).
